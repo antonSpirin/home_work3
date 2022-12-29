@@ -25,19 +25,25 @@ list_date_keys = list(date_dict.keys())
 
 month_dict = {'01': 'Января', '02': 'Февраля', '03': 'Марта', '04': 'Апреля', '05': 'Мая', '06': 'Июня', '07': 'Июля',
               '08': 'Августа', '09': 'Сентября', '10': 'Октября', '11': 'Ноября', '12': 'Декабря'}
-list_month_keys=list(month_dict.keys())
+list_month_keys = list(month_dict.keys())
+true_answer = 0
+false_answer = 0
 
 for i in range(count_names):
     date_of_birth = input(f'Когда родился {select_names[i]} ? '
                           f'введите дату рождения в формате dd.mm.yyyy:')
     if date_of_birth == dict_celeb.get(select_names[i]):
         print(f'Вы угадали! {select_names[i]} родился {date_of_birth}!')
+        true_answer += 1
     else:
+        false_answer += 1
         for y in range(len(list_date_keys)):
-            if list_date_keys(y).find(date_of_birth, [0], [2]) != -1:
-                date_find = date_dict.get(y)
-        for x in range (len(list_month_keys)):
-            if list_month_keys(y).find(date_of_birth, [2], [5]) != -1:
-                month_find = month_dict.get(y)
+            if dict_celeb.get(select_names[i]).find(list_date_keys[y], 0, 2) != -1:
+                date_find = date_dict.get(list_date_keys[y])
+        for x in range(len(list_month_keys)):
+            if dict_celeb.get(select_names[i]).find(list_month_keys[x], 2, 5) != -1:
+                month_find = month_dict.get(list_month_keys[x])
 
-    print(f'{select_names[i]} родился  {date_find}.{month_find}.{}!')
+    print(f'{select_names[i]} родился  {date_find} {month_find} {dict_celeb.get(select_names[i])[6:]} года')
+print('Количество правильных ответов: ', true_answer)
+print('Количество не правильных ответов: ', false_answer)
