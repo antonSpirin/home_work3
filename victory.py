@@ -28,22 +28,24 @@ month_dict = {'01': 'Января', '02': 'Февраля', '03': 'Марта', 
 list_month_keys = list(month_dict.keys())
 true_answer = 0
 false_answer = 0
+repeat_prog = 'да'
+while repeat_prog == 'да':
+    for i in range(count_names):
+        date_of_birth = input(f'Когда родился {select_names[i]} ? '
+                              f'введите дату рождения в формате dd.mm.yyyy:')
+        if date_of_birth == dict_celeb.get(select_names[i]):
+            print(f'Вы угадали! {select_names[i]} родился {date_of_birth}!')
+            true_answer += 1
+        else:
+            false_answer += 1
+            for y in range(len(list_date_keys)):
+                if dict_celeb.get(select_names[i]).find(list_date_keys[y], 0, 2) != -1:
+                    date_find = date_dict.get(list_date_keys[y])
+            for x in range(len(list_month_keys)):
+                if dict_celeb.get(select_names[i]).find(list_month_keys[x], 2, 5) != -1:
+                    month_find = month_dict.get(list_month_keys[x])
 
-for i in range(count_names):
-    date_of_birth = input(f'Когда родился {select_names[i]} ? '
-                          f'введите дату рождения в формате dd.mm.yyyy:')
-    if date_of_birth == dict_celeb.get(select_names[i]):
-        print(f'Вы угадали! {select_names[i]} родился {date_of_birth}!')
-        true_answer += 1
-    else:
-        false_answer += 1
-        for y in range(len(list_date_keys)):
-            if dict_celeb.get(select_names[i]).find(list_date_keys[y], 0, 2) != -1:
-                date_find = date_dict.get(list_date_keys[y])
-        for x in range(len(list_month_keys)):
-            if dict_celeb.get(select_names[i]).find(list_month_keys[x], 2, 5) != -1:
-                month_find = month_dict.get(list_month_keys[x])
-
-    print(f'{select_names[i]} родился  {date_find} {month_find} {dict_celeb.get(select_names[i])[6:]} года')
-print('Количество правильных ответов: ', true_answer)
-print('Количество не правильных ответов: ', false_answer)
+        print(f'{select_names[i]} родился  {date_find} {month_find} {dict_celeb.get(select_names[i])[6:]} года')
+    print('Количество правильных ответов: ', true_answer)
+    print('Количество не правильных ответов: ', false_answer)
+    repeat_prog = input('Если хотите начать игру сначала, введите - да, если не хотите - введите нет: ')
